@@ -1,0 +1,5 @@
+Reports/
+Logs/
+Cache/
+*.zip
+.DS_Store
