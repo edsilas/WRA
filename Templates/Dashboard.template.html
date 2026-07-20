@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Windows Resource Auditor - Dashboard | Desenvolvido por Edsilas -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><!--WRA:TITLE--></title>
+<style>
+<!--WRA:STYLE-->
+</style>
+</head>
+<body>
+<div class="wra-app">
+  <aside class="wra-sidebar" id="wra-nav">
+    <div class="wra-brand">
+      <div class="wra-brand-text">
+        <span class="wra-brand-name">WRA</span>
+        <span class="wra-brand-ver" id="wra-version"></span>
+      </div>
+    </div>
+    <nav class="wra-navlist" id="wra-navlist"></nav>
+    <div class="wra-sidefoot">
+      <div class="wra-tip"><strong>Dica.</strong> Comece pelos itens <b>Crítico</b> e <b>Alto</b> na seção de atenção; clique em um item para ir direto ao detalhe.</div>
+      <div class="wra-host" id="wra-host"></div>
+    </div>
+  </aside>
+
+  <main class="wra-main">
+    <header class="wra-topbar">
+      <div class="wra-topbar-hint">Use os filtros de cada seção para correlacionar os dados</div>
+      <div class="wra-actions">
+        <button type="button" class="wra-btn" id="wra-export-json">Exportar JSON</button>
+        <button type="button" class="wra-btn" id="wra-export-md">Exportar Markdown</button>
+      </div>
+    </header>
+
+    <div class="wra-content" id="wra-content">
+      <!-- Secoes injetadas dinamicamente pelo dashboard.js -->
+    </div>
+
+    <footer class="wra-footer" id="wra-footer"></footer>
+  </main>
+</div>
+
+<script id="wra-data" type="application/json"><!--WRA:DATA--></script>
+<script>
+<!--WRA:SCRIPT-->
+</script>
+</body>
+</html>
