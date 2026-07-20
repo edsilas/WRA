@@ -1,0 +1,30 @@
+WRA - Windows Resource Auditor
+Copyright 2023-2026 Edsilas
+
+Ferramenta somente leitura de auditoria, monitoramento, inventário,
+diagnóstico e relatório de recursos do Windows. Coleta o estado do sistema
+(hardware, sistema operacional, software, processos, rede, serviços, eventos
+e segurança), calcula índices de saúde, segurança e desempenho e gera um
+dashboard HTML autocontido, sem nunca modificar o sistema auditado.
+
+This product is licensed under the Apache License, Version 2.0.
+You may obtain a copy of the License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+------------------------------------------------------------------------------
+Third-party components
+------------------------------------------------------------------------------
+
+This product currently bundles no third-party software. It relies solely on
+components already provided by the Microsoft Windows operating system and the
+Windows PowerShell / .NET runtime, which are not redistributed with this
+project and remain governed by their own licenses.
+
+If third-party works are added to this distribution in the future, their
+required attribution, copyright and license notices must be listed in this
+section, in accordance with Section 4(d) of the Apache License, Version 2.0.
