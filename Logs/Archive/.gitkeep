@@ -1,0 +1,2 @@
+Diretorio de logs gerado em tempo de execucao. Arquivos WRA_<data>.log sao
+rotacionados; versoes antigas vao para Logs\Archive\.

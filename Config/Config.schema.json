@@ -1,0 +1,761 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Windows Resource Auditor Configuration Schema",
+  "description": "Estrutura, tipos, faixas e valores padrao (default) da configuracao. Os defaults aqui sao a fonte de fallback quando uma chave esta ausente no Config.json.",
+  "type": "object",
+  "properties": {
+    "Version": {
+      "type": "string",
+      "default": "1.1.0"
+    },
+    "General": {
+      "type": "object",
+      "properties": {
+        "ComputerNameOverride": {
+          "type": "string",
+          "default": ""
+        },
+        "Culture": {
+          "type": "string",
+          "default": "auto"
+        },
+        "MaxParallelism": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64,
+          "default": 4
+        },
+        "PreferRunspaces": {
+          "type": "boolean",
+          "default": true
+        },
+        "PreventMultipleInstances": {
+          "type": "boolean",
+          "default": true
+        },
+        "FailSafe": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "Logging": {
+      "type": "object",
+      "properties": {
+        "Level": {
+          "type": "string",
+          "enum": [
+            "Trace",
+            "Debug",
+            "Info",
+            "Warn",
+            "Error"
+          ],
+          "default": "Info"
+        },
+        "Directory": {
+          "type": "string",
+          "default": "Logs"
+        },
+        "FileNamePattern": {
+          "type": "string",
+          "default": "WRA_{date}.log"
+        },
+        "IncludeStackTrace": {
+          "type": "boolean",
+          "default": true
+        },
+        "Encoding": {
+          "type": "string",
+          "enum": [
+            "utf8-no-bom",
+            "utf8-bom"
+          ],
+          "default": "utf8-no-bom"
+        },
+        "Console": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "UseColor": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "Rotation": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "MaxSizeMB": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1024,
+              "default": 10
+            },
+            "MaxAgeDays": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3650,
+              "default": 30
+            },
+            "MaxFiles": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 60
+            },
+            "Compress": {
+              "type": "boolean",
+              "default": true
+            },
+            "ArchiveSubdir": {
+              "type": "string",
+              "default": "Archive"
+            }
+          }
+        }
+      }
+    },
+    "Modules": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "array",
+          "default": [
+            "Monitor",
+            "ProcessAnalyzer",
+            "Network",
+            "Security",
+            "Inventory"
+          ]
+        },
+        "Monitor": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "SampleIntervalSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3600,
+              "default": 2
+            },
+            "DurationSeconds": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 86400,
+              "default": 10
+            },
+            "UseEtw": {
+              "type": "boolean",
+              "default": true
+            },
+            "UsePerformanceCounters": {
+              "type": "boolean",
+              "default": true
+            },
+            "TopProcesses": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 10
+            },
+            "CollectGpu": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeServices": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeEvents": {
+              "type": "boolean",
+              "default": true
+            },
+            "EventsLookbackHours": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8760,
+              "default": 24
+            },
+            "EventsMaxItems": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 25
+            },
+            "AutoStoppedServicesMax": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 25
+            }
+          }
+        },
+        "ProcessAnalyzer": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeCommandLine": {
+              "type": "boolean",
+              "default": true
+            },
+            "ComputeHashes": {
+              "type": "boolean",
+              "default": true
+            },
+            "VerifySignatures": {
+              "type": "boolean",
+              "default": true
+            },
+            "ResolveModules": {
+              "type": "boolean",
+              "default": false
+            },
+            "ResolveOwner": {
+              "type": "boolean",
+              "default": true
+            },
+            "CorrelateServices": {
+              "type": "boolean",
+              "default": true
+            },
+            "CorrelateStartup": {
+              "type": "boolean",
+              "default": true
+            },
+            "ParallelHashing": {
+              "type": "boolean",
+              "default": true
+            },
+            "HashMaxFileSizeMB": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1048576,
+              "default": 512
+            },
+            "MaxProcesses": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000,
+              "default": 0
+            }
+          }
+        },
+        "Network": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "ResolveDns": {
+              "type": "boolean",
+              "default": false
+            },
+            "IncludeInterfaces": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeConnections": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeListeners": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeRoutes": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeShares": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeSessions": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeFirewallProfiles": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeVpn": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeHyperVSwitch": {
+              "type": "boolean",
+              "default": true
+            },
+            "CorrelateProcesses": {
+              "type": "boolean",
+              "default": true
+            },
+            "MaxConnections": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000,
+              "default": 0
+            },
+            "CapturePacketContent": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "Security": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckDefender": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckFirewall": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckSmartScreen": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckUac": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckTpm": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckSecureBoot": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckBitLocker": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckCredentialGuard": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckMemoryIntegrity": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckWindowsUpdate": {
+              "type": "boolean",
+              "default": true
+            },
+            "CheckEvents": {
+              "type": "boolean",
+              "default": true
+            },
+            "UpdateMaxAgeDays": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3650,
+              "default": 35
+            },
+            "EventsLookbackHours": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8760,
+              "default": 24
+            }
+          }
+        },
+        "Inventory": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeHardware": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeFirmware": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeOperatingSystem": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeSoftware": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeFeatures": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeControllers": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludePrinters": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeNetworkAdapters": {
+              "type": "boolean",
+              "default": true
+            },
+            "IncludeLicensing": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "Thresholds": {
+      "type": "object",
+      "properties": {
+        "Cpu": {
+          "type": "object",
+          "properties": {
+            "WarnPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 80
+            },
+            "CriticalPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 95
+            },
+            "SustainSeconds": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 86400,
+              "default": 30
+            }
+          }
+        },
+        "Memory": {
+          "type": "object",
+          "properties": {
+            "WarnPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 80
+            },
+            "CriticalPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 92
+            }
+          }
+        },
+        "Disk": {
+          "type": "object",
+          "properties": {
+            "WarnPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 85
+            },
+            "CriticalPercent": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 95
+            },
+            "QueueLengthWarn": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000,
+              "default": 2
+            }
+          }
+        },
+        "Network": {
+          "type": "object",
+          "properties": {
+            "WarnMbps": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000,
+              "default": 800
+            }
+          }
+        }
+      }
+    },
+    "Timeouts": {
+      "type": "object",
+      "properties": {
+        "OperationSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400,
+          "default": 120
+        },
+        "ModuleSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400,
+          "default": 300
+        },
+        "CimSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600,
+          "default": 30
+        },
+        "ProcessSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600,
+          "default": 60
+        }
+      }
+    },
+    "Scheduler": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "TaskNamePrefix": {
+          "type": "string",
+          "default": "WRA_"
+        },
+        "RunAsHighest": {
+          "type": "boolean",
+          "default": true
+        },
+        "PreventMultipleInstances": {
+          "type": "boolean",
+          "default": true
+        },
+        "Tasks": {
+          "type": "array",
+          "default": [
+            {
+              "Name": "DailyAudit",
+              "Trigger": "Daily",
+              "At": "03:00",
+              "Run": [
+                "All"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Triggers": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "PollSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600,
+          "default": 15
+        },
+        "CooldownSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400,
+          "default": 300
+        },
+        "Rules": {
+          "type": "array",
+          "default": [
+            {
+              "Name": "CpuSpike",
+              "Metric": "Cpu",
+              "Operator": ">=",
+              "Value": 95,
+              "ForSeconds": 60,
+              "Run": [
+                "Monitor",
+                "ProcessAnalyzer"
+              ]
+            },
+            {
+              "Name": "MemoryPressure",
+              "Metric": "Memory",
+              "Operator": ">=",
+              "Value": 92,
+              "ForSeconds": 60,
+              "Run": [
+                "Monitor",
+                "ProcessAnalyzer"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "Reports": {
+      "type": "object",
+      "properties": {
+        "Directory": {
+          "type": "string",
+          "default": "Reports"
+        },
+        "Formats": {
+          "type": "array",
+          "default": [
+            "HTML",
+            "JSON",
+            "CSV"
+          ]
+        },
+        "KeepLatest": {
+          "type": "boolean",
+          "default": true
+        },
+        "RetentionRuns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000,
+          "default": 30
+        },
+        "EmbedAssets": {
+          "type": "boolean",
+          "default": true
+        },
+        "Title": {
+          "type": "string",
+          "default": "Windows Resource Auditor Report"
+        }
+      }
+    },
+    "Severity": {
+      "type": "object",
+      "properties": {
+        "Levels": {
+          "type": "array",
+          "default": [
+            "Info",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ]
+        },
+        "Colors": {
+          "type": "object",
+          "properties": {
+            "Info": {
+              "type": "string",
+              "default": "#3b82f6"
+            },
+            "Low": {
+              "type": "string",
+              "default": "#22c55e"
+            },
+            "Medium": {
+              "type": "string",
+              "default": "#eab308"
+            },
+            "High": {
+              "type": "string",
+              "default": "#f97316"
+            },
+            "Critical": {
+              "type": "string",
+              "default": "#ef4444"
+            }
+          }
+        }
+      }
+    },
+    "Performance": {
+      "type": "object",
+      "properties": {
+        "UseSharedCimSession": {
+          "type": "boolean",
+          "default": true
+        },
+        "CimProtocol": {
+          "type": "string",
+          "enum": [
+            "Dcom",
+            "Wsman"
+          ],
+          "default": "Dcom"
+        },
+        "CacheTtlSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400,
+          "default": 300
+        }
+      }
+    },
+    "Cache": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "Directory": {
+          "type": "string",
+          "default": "Cache"
+        },
+        "SignatureTtlHours": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000,
+          "default": 168
+        },
+        "BaselineEnabled": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "Safety": {
+      "type": "object",
+      "properties": {
+        "ReadOnly": {
+          "type": "boolean",
+          "default": true
+        },
+        "AllowManualRecommendationsExport": {
+          "type": "boolean",
+          "default": true
+        },
+        "NeverModifySystem": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  }
+}

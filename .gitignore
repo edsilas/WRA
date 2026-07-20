@@ -1,0 +1,29 @@
+# Publica somente o projeto WRA. Qualquer outro arquivo na pasta fica de fora.
+/*
+!/.gitignore
+!/Assets/
+!/Config/
+!/Docs/
+!/Modules/
+!/Templates/
+!/Tests/
+!/Core.ps1
+!/Launcher.bat
+!/README.md
+!/CHANGELOG.md
+!/LICENSE
+!/NOTICE
+
+# Estrutura das pastas de saida e versionada; o conteudo gerado, nao.
+!/Cache/
+!/Logs/
+!/Reports/
+Cache/**
+!Cache/**/
+!Cache/**/.gitkeep
+Logs/**
+!Logs/**/
+!Logs/**/.gitkeep
+Reports/**
+!Reports/**/
+!Reports/**/.gitkeep

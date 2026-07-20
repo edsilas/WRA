@@ -1,0 +1,2 @@
+Diretorio de saida gerado em tempo de execucao. Cada execucao cria
+Reports\<RunId>\ (dashboard.html, data.json, *.csv) e atualiza Reports\Latest\.

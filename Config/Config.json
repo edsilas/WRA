@@ -1,0 +1,224 @@
+{
+  "Version": "1.1.0",
+  "General": {
+    "ComputerNameOverride": "",
+    "Culture": "auto",
+    "MaxParallelism": 4,
+    "PreferRunspaces": true,
+    "PreventMultipleInstances": true,
+    "FailSafe": true
+  },
+  "Logging": {
+    "Level": "Info",
+    "Directory": "Logs",
+    "FileNamePattern": "WRA_{date}.log",
+    "IncludeStackTrace": true,
+    "Encoding": "utf8-no-bom",
+    "Console": {
+      "Enabled": true,
+      "UseColor": true
+    },
+    "Rotation": {
+      "Enabled": true,
+      "MaxSizeMB": 10,
+      "MaxAgeDays": 30,
+      "MaxFiles": 60,
+      "Compress": true,
+      "ArchiveSubdir": "Archive"
+    }
+  },
+  "Modules": {
+    "Enabled": [
+      "Monitor",
+      "ProcessAnalyzer",
+      "Network",
+      "Security",
+      "Inventory"
+    ],
+    "Monitor": {
+      "Enabled": true,
+      "SampleIntervalSeconds": 2,
+      "DurationSeconds": 10,
+      "UseEtw": true,
+      "UsePerformanceCounters": true,
+      "TopProcesses": 10,
+      "CollectGpu": true,
+      "IncludeServices": true,
+      "IncludeEvents": true,
+      "EventsLookbackHours": 24,
+      "EventsMaxItems": 25,
+      "AutoStoppedServicesMax": 25
+    },
+    "ProcessAnalyzer": {
+      "Enabled": true,
+      "IncludeCommandLine": true,
+      "ComputeHashes": true,
+      "VerifySignatures": true,
+      "ResolveModules": false,
+      "ResolveOwner": true,
+      "CorrelateServices": true,
+      "CorrelateStartup": true,
+      "ParallelHashing": true,
+      "HashMaxFileSizeMB": 512,
+      "MaxProcesses": 0
+    },
+    "Network": {
+      "Enabled": true,
+      "ResolveDns": false,
+      "IncludeInterfaces": true,
+      "IncludeConnections": true,
+      "IncludeListeners": true,
+      "IncludeRoutes": true,
+      "IncludeShares": true,
+      "IncludeSessions": true,
+      "IncludeFirewallProfiles": true,
+      "IncludeVpn": true,
+      "IncludeHyperVSwitch": true,
+      "CorrelateProcesses": true,
+      "MaxConnections": 0,
+      "CapturePacketContent": false
+    },
+    "Security": {
+      "Enabled": true,
+      "CheckDefender": true,
+      "CheckFirewall": true,
+      "CheckSmartScreen": true,
+      "CheckUac": true,
+      "CheckTpm": true,
+      "CheckSecureBoot": true,
+      "CheckBitLocker": true,
+      "CheckCredentialGuard": true,
+      "CheckMemoryIntegrity": true,
+      "CheckWindowsUpdate": true,
+      "CheckEvents": true,
+      "UpdateMaxAgeDays": 35,
+      "EventsLookbackHours": 24
+    },
+    "Inventory": {
+      "Enabled": true,
+      "IncludeHardware": true,
+      "IncludeFirmware": true,
+      "IncludeOperatingSystem": true,
+      "IncludeSoftware": true,
+      "IncludeFeatures": true,
+      "IncludeControllers": true,
+      "IncludePrinters": true,
+      "IncludeNetworkAdapters": true,
+      "IncludeLicensing": true
+    }
+  },
+  "Thresholds": {
+    "Cpu": {
+      "WarnPercent": 80,
+      "CriticalPercent": 95,
+      "SustainSeconds": 30
+    },
+    "Memory": {
+      "WarnPercent": 80,
+      "CriticalPercent": 92
+    },
+    "Disk": {
+      "WarnPercent": 85,
+      "CriticalPercent": 95,
+      "QueueLengthWarn": 2
+    },
+    "Network": {
+      "WarnMbps": 800
+    }
+  },
+  "Timeouts": {
+    "OperationSeconds": 120,
+    "ModuleSeconds": 300,
+    "CimSeconds": 30,
+    "ProcessSeconds": 60
+  },
+  "Scheduler": {
+    "Enabled": false,
+    "TaskNamePrefix": "WRA_",
+    "RunAsHighest": true,
+    "PreventMultipleInstances": true,
+    "Tasks": [
+      {
+        "Name": "DailyAudit",
+        "Trigger": "Daily",
+        "At": "03:00",
+        "Run": [
+          "All"
+        ]
+      }
+    ]
+  },
+  "Triggers": {
+    "Enabled": false,
+    "PollSeconds": 15,
+    "CooldownSeconds": 300,
+    "Rules": [
+      {
+        "Name": "CpuSpike",
+        "Metric": "Cpu",
+        "Operator": ">=",
+        "Value": 95,
+        "ForSeconds": 60,
+        "Run": [
+          "Monitor",
+          "ProcessAnalyzer"
+        ]
+      },
+      {
+        "Name": "MemoryPressure",
+        "Metric": "Memory",
+        "Operator": ">=",
+        "Value": 92,
+        "ForSeconds": 60,
+        "Run": [
+          "Monitor",
+          "ProcessAnalyzer"
+        ]
+      }
+    ]
+  },
+  "Reports": {
+    "Directory": "Reports",
+    "Formats": [
+      "HTML",
+      "JSON",
+      "CSV"
+    ],
+    "KeepLatest": true,
+    "RetentionRuns": 30,
+    "EmbedAssets": true,
+    "Title": "Windows Resource Auditor Report"
+  },
+  "Severity": {
+    "Levels": [
+      "Info",
+      "Low",
+      "Medium",
+      "High",
+      "Critical"
+    ],
+    "Colors": {
+      "Info": "#3b82f6",
+      "Low": "#22c55e",
+      "Medium": "#eab308",
+      "High": "#f97316",
+      "Critical": "#ef4444"
+    }
+  },
+  "Performance": {
+    "UseSharedCimSession": true,
+    "CimProtocol": "Dcom",
+    "CacheTtlSeconds": 300
+  },
+  "Cache": {
+    "Enabled": true,
+    "Directory": "Cache",
+    "SignatureTtlHours": 168,
+    "BaselineEnabled": true
+  },
+  "Safety": {
+    "ReadOnly": true,
+    "AllowManualRecommendationsExport": true,
+    "NeverModifySystem": true
+  }
+}

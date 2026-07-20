@@ -1,0 +1,2 @@
+Cache em disco gerado em tempo de execucao (ex.: Cache\signatures\ guarda
+hashes/assinaturas de processos com invalidacao por tamanho/data/TTL).
