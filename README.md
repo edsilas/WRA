@@ -1,18 +1,10 @@
 # Windows Resource Auditor (WRA) — v1.1.0
 
 <p align="left">
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-0078D4?style=flat-square" alt="License">
-  </a>
-  <a href="CHANGELOG.md">
-    <img src="https://img.shields.io/badge/Version-1.1.0-107C10?style=flat-square" alt="Version">
-  </a>
-  <a href="#4-requisitos-mínimos">
-    <img src="https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE?style=flat-square" alt="PowerShell">
-  </a>
-  <a href="#4-requisitos-mínimos">
-    <img src="https://img.shields.io/badge/Windows-10%2F11%20%7C%20Server%202012--2025-0078D4?style=flat-square" alt="Windows">
-  </a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-0078D4?style=flat-square" alt="License"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Release-v1.1.0-107C10?style=flat-square" alt="Release"></a>
+  <a href="#4-requisitos-mínimos"><img src="https://img.shields.io/badge/PowerShell-5.1%20%7C%207-5391FE?style=flat-square" alt="PowerShell"></a>
+  <a href="#4-requisitos-mínimos"><img src="https://img.shields.io/badge/Platform-Windows%2010%2F11%20%7C%20Server%202012--2025-0078D4?style=flat-square" alt="Platform"></a>
 </p>
 
 **Um verificador de saúde para o seu computador Windows.** O WRA examina a máquina, monta um relatório visual fácil de ler e mostra, **em primeiro lugar, o que precisa da sua atenção** — sem nunca alterar nada no sistema.
