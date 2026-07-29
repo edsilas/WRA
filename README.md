@@ -1,6 +1,6 @@
 # Windows Resource Auditor (WRA) — v1.1.0
 
-
+<p align="left">
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-Apache%202.0-0078D4?style=flat-square&logo=apache&logoColor=white" alt="License">
   </a>
@@ -13,7 +13,7 @@
   <a href="#4-requisitos-mínimos">
     <img src="https://img.shields.io/badge/Shell-PowerShell%205.1%20%7C%207-5391FE?style=flat-square&logo=powershell&logoColor=white" alt="PowerShell">
   </a>
-
+</p>
 
 **Um verificador de saúde para o seu computador Windows.** O WRA examina a máquina, monta um relatório visual fácil de ler e mostra, **em primeiro lugar, o que precisa da sua atenção** — sem nunca alterar nada no sistema.
 
